@@ -3,7 +3,7 @@ const { Player } = require("discord-player");
 const handleMenuSelect = require("./events/eventHandlers/selectMenu");
 const handleSlashCommands = require("./events/eventHandlers/slashCommands");
 const registerEvents = require("./events/events");
-const registerCommands = require("./commands/commands");
+const { registerCommands } = require("./commands/commands");
 
 const client = new Client({
   intents: [
@@ -16,11 +16,11 @@ const client = new Client({
 });
 const player = new Player(client);
 client.commands = new Collection();
-registerCommands(client);
-registerEvents(client);
 
 client.once("ready", () => {
-  console.log("Ready!");
+  registerCommands(client);
+  registerEvents(client);
+  console.log('bot is up!');
 });
 
 client.on("interactionCreate", async (interaction) => {

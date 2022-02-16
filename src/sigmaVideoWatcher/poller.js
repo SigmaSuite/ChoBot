@@ -14,7 +14,7 @@ const streamServer = {
   lastTimeOnline: null,
 };
 
-function pollForStream(botClient) {
+function pollForStream(botClient, streamAddress) {
   const client = new WebSocketClient();
 
   client.on("connectFailed", async (error) => {
@@ -66,7 +66,7 @@ function pollForStream(botClient) {
 
     sendOffer();
   });
-  client.connect("ws://sigmasuite.ddns.net:3333/app/stream");
+  client.connect(streamAddress);
 }
 
 module.exports = pollForStream;
